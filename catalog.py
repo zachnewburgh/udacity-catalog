@@ -26,65 +26,49 @@ session = DBSession()
 
 
 # Show all categories
-@app.route('/')
-@app.route('/categories/')
+@app.route('/catalog/')
 def indexCategory():
     categories = session.query(Category).order_by(asc(Category.name))
     return render_template('indexCategory.html', categories=categories)
 
 
-# Create a new category
-@app.route('/categories/new/', methods=['GET', 'POST'])
-def newCategory():
-    return "category new"
-    # return render_template('newCategory.html')
-
-
-# Edit a category
-@app.route('/categories/<int:category_id>/edit/', methods=['GET', 'POST'])
-def editCategory(category_id):
-    return "category edit"
-    # categoryToEdit = session.query(Category).filter_by(id=category_id).one()
-    # return render_template('editCategory.html', category=categoryToEdit)
-
-
-# Delete a category
-@app.route('/categories/<int:category_id>/delete/', methods=['GET', 'POST'])
-def deleteCategory(category_id):
-    return "category delete"
-    # categoryToDelete = session.query(Category).filter_by(id=category_id).one()
-    # return render_template('deleteCategory.html', category=categoryToDelete)
-
-
 # Show a category
-@app.route('/categories/<int:category_id>/')
-@app.route('/categories/<int:category_id>/items/')
-def showCategory(category_id):
-    return "category show"
+@app.route('/catalog/<string:category_name>/items/')
+def showCategory(category_name):
+    return "%s category show" % category_name
     # category = session.query(Category).filter_by(id=category_id).one()
     # items = session.query(CategoryItem).filter_by(category_id=category_id).all()
     # return render_template('category.html', items=items, category=category)
 
 
 # Create a new category item
-@app.route('/categories/<int:category_id>/items/new/', methods=['GET', 'POST'])
-def newCategoryItem(category_id):
+@app.route('/catalog/<string:category_name>/items/new/', methods=['GET', 'POST'])
+def newCategoryItem(category_name):
     return "category item new"
     # category = session.query(Category).filter_by(id=category_id).one()
     # return render_template('newCategoryItem.html', category_id=category_id)
 
 
+# Show a category
+@app.route('/catalog/<string:category_name>/<string:item_name>/')
+def showCategoryItem(category_name, item_name):
+    return "%s category %s item show" % (category_name, item_name)
+    # category = session.query(Category).filter_by(id=category_id).one()
+    # items = session.query(CategoryItem).filter_by(category_id=category_id).all()
+    # return render_template('category.html', items=items, category=category)
+
+
 # Edit a category item
-@app.route('/categories/<int:category_id>/items/<int:item_id>/edit', methods=['GET', 'POST'])
-def editCategoryItem(category_id, item_id):
+@app.route('/catalog/<string:category_name>/<string:item_name>/edit', methods=['GET', 'POST'])
+def editCategoryItem(category_id, item_name):
     return "category item edit"
     # itemToEdit = session.query(CategoryItem).filter_by(id=item_id).one()
-    # return render_template('editCategoryItem.html', category_id=category_id, item_id=item_id, item=itemToEdit)
+    # return render_template('editCategoryItem.html', category_id=category_id, item_name=item_id, item=itemToEdit)
 
 
 # Delete a category item
-@app.route('/categories/<int:category_id>/items/<int:item_id>/delete', methods=['GET', 'POST'])
-def deleteCategoryItem(category_id, item_id):
+@app.route('/catalog/<string:category_name>/<string:item_name>/delete', methods=['GET', 'POST'])
+def deleteCategoryItem(category_name, item_name):
     return "category item delete"
     # category = session.query(Category).filter_by(id=category_id).one()
     # itemToDelete = session.query(CategoryItem).filter_by(id=item_id).one()
