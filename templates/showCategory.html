@@ -1,0 +1,6 @@
+<h1>{{category.name}}</h1>
+
+{% for item in items %}
+  <a href = "{{url_for('showCategoryItem', category_name = category.name, item_name = item.title)}}">{{item.title}}</a>
+  <br>
+{% endfor %}

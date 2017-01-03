@@ -35,10 +35,9 @@ def indexCategory():
 # Show a category
 @app.route('/catalog/<string:category_name>/items/')
 def showCategory(category_name):
-    return "%s category show" % category_name
-    # category = session.query(Category).filter_by(id=category_id).one()
-    # items = session.query(CategoryItem).filter_by(category_id=category_id).all()
-    # return render_template('category.html', items=items, category=category)
+    category = session.query(Category).filter_by(name=category_name).one()
+    items = session.query(CategoryItem).filter_by(cat_id=category.id).all()
+    return render_template('showCategory.html', items=items, category=category)
 
 
 # Create a new category item
