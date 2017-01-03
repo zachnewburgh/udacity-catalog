@@ -29,8 +29,10 @@ session = DBSession()
 @app.route('/')
 @app.route('/categories/')
 def showCategories():
-    return "category index"
-    # categories = session.query(Category).order_by(asc(Category.name))
+    # return "category index"
+    categories = session.query(Category).order_by(asc(Category.name))
+    for category in categories:
+        return "%s" % category.name
     # return render_template('categories.html', categories=categories)
 
 
