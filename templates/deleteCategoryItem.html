@@ -1,9 +1,6 @@
-<h2> Are you sure you want to delete {{item.title}}? </h2>
+<h2>Delete Item</h2>
 
 <form action="#" method="post">
-  <input type="submit" value="Delete">
+  <label>Are you sure you want to delete ?</label><br>
+  <input type="submit" value="Submit">
 </form>
-
-<a href="{{url_for('showCategory', category_name=item.category.name)}}">
-  <button>Cancel</button>
-</a>
