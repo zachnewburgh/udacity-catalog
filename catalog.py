@@ -29,6 +29,7 @@ session = DBSession()
 def root():
     return redirect(url_for('indexCategory'))
 
+
 # Show all categories
 @app.route('/catalog/')
 def indexCategory():
