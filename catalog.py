@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
-from sqlalchemy import create_engine, asc
+from sqlalchemy import create_engine, asc, desc
 from sqlalchemy.orm import sessionmaker
 from catalog_database import Base, Category, CategoryItem
 from flask import session as login_session
@@ -34,7 +34,8 @@ def root():
 @app.route('/catalog/')
 def indexCategory():
     categories = session.query(Category).order_by(asc(Category.name))
-    return render_template('indexCategory.html', categories=categories)
+    items = session.query(CategoryItem).order_by(desc(CategoryItem.id))
+    return render_template('indexCategory.html', categories=categories, items=items)
 
 
 # Show a category
