@@ -20,9 +20,95 @@ session = DBSession()
 
 
 # Create dummy categories
-Category1 = Category(name='Baseball')
+Category1 = Category(name='Soccer')
 session.add(Category1)
 session.commit()
 
+Category2 = Category(name='Basketball')
+session.add(Category2)
+session.commit()
+
+Category3 = Category(name='Baseball')
+session.add(Category3)
+session.commit()
+
+Category4 = Category(name='Frisbee')
+session.add(Category4)
+session.commit()
+
+Category5 = Category(name='Snowboarding')
+session.add(Category5)
+session.commit()
+
+Category6 = Category(name='Rock Climbing')
+session.add(Category6)
+session.commit()
+
+Category7 = Category(name='Foosball')
+session.add(Category7)
+session.commit()
+
+Category8 = Category(name='Skating')
+session.add(Category8)
+session.commit()
+
+Category9 = Category(name='Hockey')
+session.add(Category9)
+session.commit()
+
+# Create dummy items
+CategoryItem1 = CategoryItem(title='Stick',
+                             description="Hello",
+                             cat_id=9)
+session.add(CategoryItem1)
+session.commit()
+
+CategoryItem2 = CategoryItem(title='Goggles',
+                             description="Hello",
+                             cat_id=5)
+session.add(CategoryItem2)
+session.commit()
+
+CategoryItem3 = CategoryItem(title='Snowboard',
+                             description="Hello",
+                             cat_id=5)
+session.add(CategoryItem3)
+session.commit()
+
+CategoryItem4 = CategoryItem(title='Two shinguards',
+                             description="Hello",
+                             cat_id=1)
+session.add(CategoryItem4)
+session.commit()
+
+CategoryItem5 = CategoryItem(title='Shinguards',
+                             description="Hello",
+                             cat_id=1)
+session.add(CategoryItem5)
+session.commit()
+
+CategoryItem6 = CategoryItem(title='Frisbee',
+                             description="Hello",
+                             cat_id=4)
+session.add(CategoryItem6)
+session.commit()
+
+CategoryItem7 = CategoryItem(title='Bat',
+                             description="Hello",
+                             cat_id=3)
+session.add(CategoryItem7)
+session.commit()
+
+CategoryItem8 = CategoryItem(title='Jersey',
+                             description="Hello",
+                             cat_id=1)
+session.add(CategoryItem8)
+session.commit()
+
+CategoryItem9 = CategoryItem(title='Soccer Cleats',
+                             description="Hello",
+                             cat_id=1)
+session.add(CategoryItem9)
+session.commit()
 
 print "Populated the catalog database!"
