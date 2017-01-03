@@ -24,6 +24,10 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+# Redirect root to indexCategory
+@app.route('/')
+def root():
+    return redirect(url_for('indexCategory'))
 
 # Show all categories
 @app.route('/catalog/')
