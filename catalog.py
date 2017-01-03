@@ -42,7 +42,7 @@ def indexCategory():
 @app.route('/catalog/<string:category_name>/items/')
 def showCategory(category_name):
     category = session.query(Category).filter_by(name=category_name).one()
-    items = session.query(CategoryItem).filter_by(cat_id=category.id).all()
+    items = session.query(CategoryItem).filter_by(cat_id=category.id).order_by(asc(CategoryItem.title))
     return render_template('showCategory.html', items=items, category=category)
 
 
