@@ -28,9 +28,9 @@ session = DBSession()
 # Show all categories
 @app.route('/')
 @app.route('/categories/')
-def showCategories():
+def indexCategory():
     categories = session.query(Category).order_by(asc(Category.name))
-    return render_template('categories.html', categories=categories)
+    return render_template('indexCategory.html', categories=categories)
 
 
 # Create a new category
