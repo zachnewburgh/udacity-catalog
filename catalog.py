@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
-# from database_setup import Base, Catalog, Item, User
+from database_setup import Base, Category, CategoryItem
 from flask import session as login_session
 import random
 import string
@@ -19,10 +19,10 @@ app = Flask(__name__)
 
 
 # Connect to Database and create database session
-# engine = create_engine('sqlite:///catalog.db')
-# Base.metadata.bind = engine
-# DBSession = sessionmaker(bind=engine)
-# session = DBSession()
+engine = create_engine('sqlite:///catalog.db')
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
 
 
 # Show all categories
