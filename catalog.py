@@ -79,10 +79,14 @@ def editCategoryItem(category_name, item_name):
 # Delete a category item
 @app.route('/catalog/<string:category_name>/<string:item_name>/delete', methods=['GET', 'POST'])
 def deleteCategoryItem(category_name, item_name):
-    return "category item delete"
-    # category = session.query(Category).filter_by(id=category_id).one()
-    # itemToDelete = session.query(CategoryItem).filter_by(id=item_id).one()
-    # return render_template('deleteCategoryItem.html', item=itemToDelete)
+    category = session.query(Category).filter_by(name=category_name).one()
+    itemToDelete = session.query(CategoryItem).filter_by(title=item_name).one()
+    if request.method == 'POST':
+        session.delete(itemToDelete)
+        session.commit()
+        return redirect(url_for('showCategory', category_name=category_name))
+    else:
+        return render_template('deleteCategoryItem.html', item=itemToDelete)
 
 
 if __name__ == '__main__':
