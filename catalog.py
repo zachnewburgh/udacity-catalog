@@ -65,10 +65,15 @@ def showCategoryItem(category_name, item_name):
 
 # Edit a category item
 @app.route('/catalog/<string:category_name>/<string:item_name>/edit', methods=['GET', 'POST'])
-def editCategoryItem(category_id, item_name):
-    return "category item edit"
-    # itemToEdit = session.query(CategoryItem).filter_by(id=item_id).one()
-    # return render_template('editCategoryItem.html', category_id=category_id, item_name=item_id, item=itemToEdit)
+def editCategoryItem(category_name, item_name):
+    itemToEdit = session.query(CategoryItem).filter_by(title=item_name).one()
+    if request.method == 'POST':
+        if request.form['title'] and request.form['description']:
+            itemToEdit.title = request.form['title']
+            itemToEdit.description = request.form['description']
+            return redirect(url_for('showCategory', category_name=category_name))
+    else:
+        return render_template('editCategoryItem.html', item=itemToEdit)
 
 
 # Delete a category item
