@@ -1,0 +1,40 @@
+html, body {
+  margin: 0;
+}
+
+nav {
+  background-color: #021E3D;
+  padding: 1% 15%;
+  display: flex;
+}
+
+#title {
+  flex: 5;
+  margin: auto;
+}
+
+#title h1 {
+  color: white;
+  font-family: Arial;
+  font-size: 2em;
+  margin: 0;
+}
+
+#login-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#login a {
+  background-color: #E34D1C;
+  padding: 30% 70%;
+  color: white;
+  font-family: Arial;
+  text-decoration: none;
+}
+
+#oauth-signin-buttons {
+  text-align: center;
+}
