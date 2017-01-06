@@ -63,8 +63,7 @@ def indexCategory():
 def showCategory(category_name):
     categories = session.query(Category).all()
     category = session.query(Category).filter_by(name=category_name).one()
-    items = session.query(CategoryItem).filter_by(cat_id=category.id).order_by(asc(CategoryItem.title))
-    return render_template('showCategory.html', items=items, category=category, categories=categories)
+    return render_template('showCategory.html', category=category, categories=categories)
 
 
 # Create a new category item
@@ -85,9 +84,8 @@ def newCategoryItem(category_name):
 # Show a category
 @app.route('/catalog/<string:category_name>/<string:item_name>/')
 def showCategoryItem(category_name, item_name):
-    category = session.query(Category).filter_by(name=category_name).one()
     item = session.query(CategoryItem).filter_by(title=item_name).one()
-    return render_template('showCategoryItem.html', item=item, category=category)
+    return render_template('showCategoryItem.html', item=item)
 
 
 # Edit a category item
