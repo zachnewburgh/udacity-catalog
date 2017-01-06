@@ -12,27 +12,22 @@ This Python application provides a list of items within a variety of categories,
 ```
 $ vagrant up
 ```
-
 4. Log into the virtual machine by typing the following into the command line:
 ```
 $ vagrant ssh
 ```
-
 5. Change to the following directory by typing in the command line:
 ```
 vagrant@vagrant-ubuntu-trusty-32:~$ cd /vagrant/catalog
 ```
-
 6. Create the database by typing the following in the command line:
 ```
 vagrant@vagrant-ubuntu-trusty-32:/vagrant/catalog$ python catalog_database.py
 ```
-
 7. Populate the database by typing the following in the command line:
 ```
 vagrant@vagrant-ubuntu-trusty-32:/vagrant/catalog$ python catalog_populator.py
 ```
-
 7. Start the server by typing the following in the command line:
 ```
 vagrant@vagrant-ubuntu-trusty-32:/vagrant/catalog$ python catalog.py
