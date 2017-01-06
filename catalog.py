@@ -28,7 +28,7 @@ session = DBSession()
 # JSON APIs to view Catalog, Category, and CategoryItem information
 @app.route('/catalog.json')
 def categoriesJSON():
-    categories = session.query(Category).all()
+    categories = session.query(Category).order_by(asc(Category.name))
     return jsonify(categories=[c.serialize for c in categories])
 
 
@@ -61,7 +61,7 @@ def indexCategory():
 # Show a category
 @app.route('/catalog/<string:category_name>/items/')
 def showCategory(category_name):
-    categories = session.query(Category).all()
+    categories = session.query(Category).order_by(asc(Category.name))
     category = session.query(Category).filter_by(name=category_name).one()
     return render_template('showCategory.html', category=category, categories=categories)
 
