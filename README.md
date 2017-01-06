@@ -28,7 +28,7 @@ vagrant@vagrant-ubuntu-trusty-32:/vagrant/catalog$ python catalog_database.py
 ```
 vagrant@vagrant-ubuntu-trusty-32:/vagrant/catalog$ python catalog_populator.py
 ```
-7. Start the server by typing the following in the command line:
+8. Start the server by typing the following in the command line:
 ```
 vagrant@vagrant-ubuntu-trusty-32:/vagrant/catalog$ python catalog.py
 ```
