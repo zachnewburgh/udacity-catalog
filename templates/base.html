@@ -10,7 +10,7 @@
   <body>
     <nav>
       <div id="title">
-        <h1>Catalog App</h1>
+        <a href="{{url_for('root')}}"><h1>Catalog App</h1></a>
       </div>
 
       <div id="login-container">
@@ -24,7 +24,19 @@
       </div>
     </nav>
 
-    <div id="content">
+    <div class="flash">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %} 
+          <ul>
+          {% for message in messages %}
+            <li><strong>{{message}}</strong></li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    <div id="content-container">
       {% block content %}
       {% endblock %}
     </div>

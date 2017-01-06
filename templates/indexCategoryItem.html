@@ -1,12 +1,14 @@
 {% extends "indexCategory.html" %}
 {% block showcategory_or_indexcategoryitem %}
 
-<h2>Latest Items</h2>
+  <br><a href="{{url_for('newCategoryItem')}}">Add Item</a>
 
-{% for item in items %}
-  <a href = "{{url_for('showCategoryItem', category_name=category_name, item_name=item.title)}}">{{item.title}}</a>
-  ({{item.category.name}})
-  <br>
-{% endfor %}
+  <h2>Latest Items</h2>
+
+  {% for item in items %}
+    <a href = "{{url_for('showCategoryItem', category_name=item.category.name, item_name=item.title)}}">{{item.title}}</a>
+    <span class="italicize">({{item.category.name}})</span>
+    <br>
+  {% endfor %}
 
 {% endblock %}

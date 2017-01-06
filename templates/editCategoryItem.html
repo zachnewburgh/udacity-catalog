@@ -1,33 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Edit Category Item</h1>
+<div class="content">
+  <div id="category-item-edit">
+    <h2>Edit Item</h2>
 
-<form action="#" method = "post">
-  <label for="title">Title:</label><br>
-  <input type ="text" maxlength="50" class="form-control" name="title" value="{{item.title}}">
+    <form action="#" method = "post">
+      <label for="title">Title:</label><br>
+      <input type="text" maxlength="50" class="form-control" name="title" value="{{item.title}}">
 
-  <br><br>
+      <br><br>
 
-  <label for="description">Description:</label><br>
-  <textarea name="description">{{item.description}}</textarea>
+      <label for="description">Description:</label><br>
+      <input type="text" name="description" value="{{item.description}}">
 
-  <br><br>
+      <br><br>
 
-  <select name="category">
-    {% for category in categories %}
-      <option value="{{category.id}}" 
-              {% if category.name==item.category.name %} 
-                 selected="selected" 
-              {% endif %}>
-        {{category.name}}
-      </option>
-    {% endfor %}
-  </select>
+      <select name="category">
+        {% for category in categories %}
+          <option value="{{category.id}}" 
+                  {% if category.name==item.category.name %} 
+                     selected="selected" 
+                  {% endif %}>
+            {{category.name}}
+          </option>
+        {% endfor %}
+      </select>
 
-  <br><br>
+      <br><br>
 
-  <input type="submit" value="Edit Category Item">
-</form>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
 
 {% endblock %}

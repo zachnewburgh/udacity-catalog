@@ -50,9 +50,9 @@ def fbconnect():
         'web']['app_id']
     app_secret = json.loads(
         open('fb_client_secrets.json', 'r').read())['web']['app_secret']
-    url = """ https://graph.facebook.com/oauth/access_token?
-              grant_type=fb_exchange_token&client_id=%s&
-              client_secret=%s&fb_exchange_token=%s""" % (
+    url = ("https://graph.facebook.com/oauth/access_token?"
+           "grant_type=fb_exchange_token&client_id=%s&"
+           "client_secret=%s&fb_exchange_token=%s") % (
         app_id, app_secret, access_token)
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
@@ -61,8 +61,8 @@ def fbconnect():
     userinfo_url = "https://graph.facebook.com/v2.4/me"
     # strip expire tag from access token
     token = result.split("&")[0]
-    url = """ https://graph.facebook.com/v2.4/me?
-              %s&fields=name,id,email""" % token
+    url = ("https://graph.facebook.com/v2.4/me?"
+           "%s&fields=name,id,email") % token
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     # print "url sent for API access:%s"% url
@@ -81,8 +81,8 @@ def fbconnect():
     login_session['access_token'] = stored_token
 
     # Get user picture
-    url = """ https://graph.facebook.com/v2.4/me/picture?
-              %s&redirect=0&height=200&width=200""" % token
+    url = ("https://graph.facebook.com/v2.4/me/picture?"
+           "%s&redirect=0&height=200&width=200") % token
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     data = json.loads(result)
@@ -114,8 +114,8 @@ def fbdisconnect():
     facebook_id = login_session['facebook_id']
     # The access token must me included to successfully logout
     access_token = login_session['access_token']
-    url = """ https://graph.facebook.com/%s
-              /permissions?access_token=%s""" % (facebook_id, access_token)
+    url = ("https://graph.facebook.com/%s"
+           "/permissions?access_token=%s") % (facebook_id, access_token)
     h = httplib2.Http()
     result = h.request(url, 'DELETE')[1]
     return "you have been logged out"
@@ -309,29 +309,30 @@ def showCategory(category_name):
 
 
 # Create a new category item
-@app.route('/catalog/<string:category_name>/new/', methods=['GET', 'POST'])
-def newCategoryItem(category_name):
+@app.route('/catalog/new/', methods=['GET', 'POST'])
+def newCategoryItem():
+    categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         flash("You can only add an item if you are logged in.")
         return redirect(url_for('showCategory', category_name=category_name))
-    category = session.query(Category).filter_by(name=category_name).one()
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
-        if title and description:
+        category_id = request.form['category_id']
+        if title and description and category:
             newCategoryItem = CategoryItem(title=title,
                                            description=description,
-                                           cat_id=category.id)
+                                           cat_id=category_id)
             session.add(newCategoryItem)
             session.commit()
             return redirect(url_for('showCategory',
                                     category_name=category.name))
         else:
             return render_template('newCategoryItem.html',
-                                   category_name=category_name)
+                                   categories=categories)
     else:
         return render_template('newCategoryItem.html',
-                               category_name=category_name)
+                               categories=categories)
 
 
 # Show a category

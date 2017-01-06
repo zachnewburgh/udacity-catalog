@@ -1,6 +1,9 @@
 html, body {
   margin: 0;
+  background-color: #d8d6d6;
 }
+
+/* NAVBAR */
 
 nav {
   background-color: #021E3D;
@@ -20,6 +23,10 @@ nav {
   margin: 0;
 }
 
+#title a {
+  text-decoration: none;
+}
+
 #login-container {
   flex: 1;
   display: flex;
@@ -29,12 +36,84 @@ nav {
 
 #login a {
   background-color: #E34D1C;
-  padding: 30% 70%;
+  padding: 15px 40px;
   color: white;
   font-family: Arial;
   text-decoration: none;
 }
 
+/* OAUTH BUTTONS */
+
 #oauth-signin-buttons {
   text-align: center;
+  background-color: white;
+  margin: 1% 15%;
+  padding-top: 2%;
+  padding-left: 1.5%;
+  padding-bottom: 2%;
+  border: 0.5px solid #999999;
+}
+
+/* FLASH MESSAGES */
+
+.flash {
+  text-align: center;
+}
+
+.flash ul {
+  background-color: #27f7f3;
+  list-style: none;
+  padding: 0.5%;
+  margin: 0;
+}
+
+/* CONTAINER */
+
+.content {
+  background-color: white;
+  margin: 1% 15%;
+  padding-top: 2%;
+  padding-left: 1.5%;
+  padding-bottom: 2%;
+  border: 0.5px solid #999999;
+  display: flex;
+}
+
+.content h2 {
+  color: #021E3D;
+  font-family: Arial;
+}
+
+.content a {
+  text-decoration: none;
+  color: #E34D1C;
+  font-family: Arial;
+}
+
+.content p {
+  font-family: Arial;
+}
+
+.content form {
+  font-family: Arial;
+}
+
+.content input, .content select {
+  font-family: Arial;
+  font-size: 1em;
+}
+
+#category-index {
+  flex: 1;
+}
+
+#showcategory_or_indexcategoryitem {
+  flex: 2;
+  color: #999999;
+  font-family: Arial;
+  
+}
+
+.italicize {
+  font-style: italic;
 }

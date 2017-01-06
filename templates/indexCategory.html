@@ -1,28 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class = 'flash'>
-  {% with messages = get_flashed_messages() %}
-    {% if messages %} 
-      <ul>
-      {% for message in messages %}
-        <li> <strong> {{ message }} </strong> </li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-</div>
+<div class="content">
+  <div id="category-index">
+    <h2>Categories</h2>
 
-<h2>Categories</h2>
+    {% for category in categories %}
+      <a href = "{{url_for('showCategory', category_name=category.name)}}">{{category.name}}</a>
+      <br>
+    {% endfor %}
+  </div>
 
-{% for category in categories %}
-  <a href = "{{url_for('showCategory', category_name=category.name)}}">{{category.name}}</a>
-  <br>
-{% endfor %}
-
-<div id="showcategory_or_indexcategoryitem">
-  {% block showcategory_or_indexcategoryitem %}
-  {% endblock %}
+  <div id="showcategory_or_indexcategoryitem">
+    {% block showcategory_or_indexcategoryitem %}
+    {% endblock %}
+  </div>
 </div>
 
 {% endblock %}
