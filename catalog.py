@@ -71,12 +71,15 @@ def showCategory(category_name):
 def newCategoryItem(category_name):
     category = session.query(Category).filter_by(name=category_name).one()
     if request.method == 'POST':
-        newCategoryItem = CategoryItem(title=request.form['title'],
-                                       description=request.form['description'],
-                                       cat_id=category.id)
-        session.add(newCategoryItem)
-        session.commit()
-        return redirect(url_for('showCategory', category_name=category.name))
+        if request.form['title'] and request.form['description']:
+            newCategoryItem = CategoryItem(title=request.form['title'],
+                                           description=request.form['description'],
+                                           cat_id=category.id)
+            session.add(newCategoryItem)
+            session.commit()
+            return redirect(url_for('showCategory', category_name=category.name))
+        else:
+            return render_template('newCategoryItem.html', category_name=category_name)
     else:
         return render_template('newCategoryItem.html', category_name=category_name)
 
@@ -91,14 +94,19 @@ def showCategoryItem(category_name, item_name):
 # Edit a category item
 @app.route('/catalog/<string:category_name>/<string:item_name>/edit', methods=['GET', 'POST'])
 def editCategoryItem(category_name, item_name):
+    categories = session.query(Category).order_by(asc(Category.name))
     itemToEdit = session.query(CategoryItem).filter_by(title=item_name).one()
     if request.method == 'POST':
-        if request.form['title'] and request.form['description']:
+        if request.form['title'] and request.form['description'] and request.form['category']:
             itemToEdit.title = request.form['title']
             itemToEdit.description = request.form['description']
+            itemToEdit.cat_id = request.form['category']
+            session.commit()
             return redirect(url_for('showCategory', category_name=category_name))
+        else:
+            return render_template('editCategoryItem.html', item=itemToEdit)
     else:
-        return render_template('editCategoryItem.html', item=itemToEdit)
+        return render_template('editCategoryItem.html', item=itemToEdit, categories=categories)
 
 
 # Delete a category item

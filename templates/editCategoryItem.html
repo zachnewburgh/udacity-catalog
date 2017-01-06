@@ -11,6 +11,19 @@
 
   <br><br>
 
+  <select name="category">
+    {% for category in categories %}
+      <option value="{{ category.id }}" 
+              {% if category.name==item.category.name %} 
+                 selected="selected" 
+              {% endif %}>
+        {{ category.name }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <br><br>
+
   <input type="submit" value="Edit Category Item">
 </form>
 
