@@ -6,10 +6,11 @@
     <h2>{{item.title}}</h2>
 
     <p>Description: {{item.description}}</p>
-
-    <a href = "{{url_for('editCategoryItem', category_name = item.category.name, item_name = item.title)}}">Edit</a>
-    |
-    <a href = "{{url_for('deleteCategoryItem', category_name = item.category.name, item_name = item.title)}}">Delete</a>
+    {% if 'username' in session %}
+      <a href = "{{url_for('editCategoryItem', category_name = item.category.name, item_name = item.title)}}">Edit</a>
+      |
+      <a href = "{{url_for('deleteCategoryItem', category_name = item.category.name, item_name = item.title)}}">Delete</a>
+    {% endif %}
   </div>
 </div>
 
