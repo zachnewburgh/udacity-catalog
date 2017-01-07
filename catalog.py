@@ -314,7 +314,7 @@ def newCategoryItem():
     categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         flash("You can only add an item if you are logged in.")
-        return redirect(url_for('showCategory', category_name=category_name))
+        return redirect(url_for('login'))
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
