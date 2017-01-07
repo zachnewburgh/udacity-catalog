@@ -349,9 +349,7 @@ def showCategoryItem(category_name, item_name):
 def editCategoryItem(category_name, item_name):
     if 'username' not in login_session:
         flash("You can only edit an item if you are logged in.")
-        return redirect(url_for('showCategoryItem',
-                                category_name=category_name,
-                                item_name=item_name))
+        return redirect(url_for('login'))
     categories = session.query(Category).order_by(asc(Category.name))
     itemToEdit = session.query(CategoryItem).filter_by(title=item_name).one()
     if request.method == 'POST':
