@@ -356,7 +356,8 @@ def editCategoryItem(category_name, item_name):
         title = request.form['title']
         description = request.form['description']
         category = request.form['category']
-        if title and description and category:
+        authorized = login_session['username'] == itemToEdit.user.name
+        if title and description and category and authorized:
             itemToEdit.title = title
             itemToEdit.description = description
             itemToEdit.cat_id = category
@@ -364,6 +365,8 @@ def editCategoryItem(category_name, item_name):
             return redirect(url_for('showCategory',
                                     category_name=category_name))
         else:
+            if authorized == false:
+                flash("You can only edit an item that you created.")
             return render_template('editCategoryItem.html',
                                    item=itemToEdit)
     else:
@@ -387,9 +390,13 @@ def deleteCategoryItem(category_name, item_name):
         return redirect(url_for('login'))
     category = session.query(Category).filter_by(name=category_name).one()
     itemToDelete = session.query(CategoryItem).filter_by(title=item_name).one()
+    authorized = login_session['username'] == itemToDelete.user.name
     if request.method == 'POST':
-        session.delete(itemToDelete)
-        session.commit()
+        if authorized:
+            session.delete(itemToDelete)
+            session.commit()
+        else:
+            flash("You can only delete an item that you created.")
         return redirect(url_for('showCategory', category_name=category_name))
     else:
         if login_session['username'] == itemToDelete.user.name:
