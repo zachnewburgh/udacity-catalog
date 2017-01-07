@@ -319,11 +319,13 @@ def newCategoryItem():
         title = request.form['title']
         description = request.form['description']
         category_id = request.form['category_id']
+        user_id = login_session['user_id']
         category = session.query(Category).filter_by(id=category_id).one()
         if title and description and category_id:
             newCategoryItem = CategoryItem(title=title,
                                            description=description,
-                                           cat_id=category_id)
+                                           cat_id=category_id,
+                                           user_id=user_id)
             session.add(newCategoryItem)
             session.commit()
             return redirect(url_for('showCategory',
