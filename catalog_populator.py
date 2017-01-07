@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from catalog_database import Base, Category, CategoryItem
+from catalog_database import Base, Category, CategoryItem, User
 
 engine = create_engine('sqlite:///catalog.db')
 # Bind the engine to the metadata of the Base class so that the
@@ -18,6 +18,13 @@ DBSession = sessionmaker(bind=engine)
 # session.rollback()
 session = DBSession()
 
+
+# Create dummy user
+User1 = User(name='John Smith',
+             email='john.smith@gmail.com',
+             picture='This is his picture')
+session.add(User1)
+session.commit()
 
 # Create dummy categories
 Category1 = Category(name='Soccer')
@@ -59,55 +66,64 @@ session.commit()
 # Create dummy items
 CategoryItem1 = CategoryItem(title='Stick',
                              description="Hello",
-                             cat_id=9)
+                             cat_id=9,
+                             user_id=1)
 session.add(CategoryItem1)
 session.commit()
 
 CategoryItem2 = CategoryItem(title='Goggles',
                              description="Hello",
-                             cat_id=5)
+                             cat_id=5,
+                             user_id=1)
 session.add(CategoryItem2)
 session.commit()
 
 CategoryItem3 = CategoryItem(title='Snowboard',
                              description="Hello",
-                             cat_id=5)
+                             cat_id=5,
+                             user_id=1)
 session.add(CategoryItem3)
 session.commit()
 
 CategoryItem4 = CategoryItem(title='Two shinguards',
                              description="Hello",
-                             cat_id=1)
+                             cat_id=1,
+                             user_id=1)
 session.add(CategoryItem4)
 session.commit()
 
 CategoryItem5 = CategoryItem(title='Shinguards',
                              description="Hello",
-                             cat_id=1)
+                             cat_id=1,
+                             user_id=2)
 session.add(CategoryItem5)
 session.commit()
 
 CategoryItem6 = CategoryItem(title='Frisbee',
                              description="Hello",
-                             cat_id=4)
+                             cat_id=4,
+                             user_id=2)
 session.add(CategoryItem6)
 session.commit()
 
 CategoryItem7 = CategoryItem(title='Bat',
                              description="Hello",
-                             cat_id=3)
+                             cat_id=3,
+                             user_id=2)
 session.add(CategoryItem7)
 session.commit()
 
 CategoryItem8 = CategoryItem(title='Jersey',
                              description="Hello",
-                             cat_id=1)
+                             cat_id=1,
+                             user_id=2)
 session.add(CategoryItem8)
 session.commit()
 
 CategoryItem9 = CategoryItem(title='Soccer Cleats',
                              description="Hello",
-                             cat_id=1)
+                             cat_id=1,
+                             user_id=2)
 session.add(CategoryItem9)
 session.commit()
 

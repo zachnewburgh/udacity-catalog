@@ -11,6 +11,7 @@ class User(Base):
   name = Column(String(80), nullable = False)
   email = Column(String(80))
   picture = Column(String(250))
+  items = relationship("CategoryItem", backref="user")
 
 class Category(Base):
   __tablename__ = 'category'
@@ -36,6 +37,7 @@ class CategoryItem(Base):
   title = Column(String(80), nullable = False)
   description = Column(String(250))
   cat_id = Column(Integer, ForeignKey('category.id'))
+  user_id = Column(Integer, ForeignKey('user.id'))
 
   @property
   def serialize(self):
@@ -43,7 +45,8 @@ class CategoryItem(Base):
          'id': self.id,
          'title': self.title,
          'description': self.description,
-         'cat_id': self.cat_id
+         'cat_id': self.cat_id,
+         'user_id': self.user_id
       }
 
 
