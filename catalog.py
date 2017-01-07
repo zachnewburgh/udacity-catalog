@@ -378,9 +378,7 @@ def editCategoryItem(category_name, item_name):
 def deleteCategoryItem(category_name, item_name):
     if 'username' not in login_session:
         flash("You can only delete an item if you are logged in.")
-        return redirect(url_for('showCategoryItem',
-                        category_name=category_name,
-                        item_name=item_name))
+        return redirect(url_for('login'))
     category = session.query(Category).filter_by(name=category_name).one()
     itemToDelete = session.query(CategoryItem).filter_by(title=item_name).one()
     if request.method == 'POST':
