@@ -6,7 +6,7 @@
     <h2>{{item.title}}</h2>
 
     <p>Description: {{item.description}}</p>
-    {% if 'username' in session %}
+    {% if 'username' in session and session['username'] == item.user.name %}
       <a href = "{{url_for('editCategoryItem', category_name = item.category.name, item_name = item.title)}}">Edit</a>
       |
       <a href = "{{url_for('deleteCategoryItem', category_name = item.category.name, item_name = item.title)}}">Delete</a>

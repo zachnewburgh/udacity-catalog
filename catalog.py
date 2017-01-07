@@ -367,9 +367,15 @@ def editCategoryItem(category_name, item_name):
             return render_template('editCategoryItem.html',
                                    item=itemToEdit)
     else:
-        return render_template('editCategoryItem.html',
-                               item=itemToEdit,
-                               categories=categories)
+        if login_session['username'] == itemToEdit.user.name:
+            return render_template('editCategoryItem.html',
+                                   item=itemToEdit,
+                                   categories=categories)
+        else:
+            flash("You can only edit an item that you created.")
+            return redirect(url_for('showCategoryItem',
+                                    category_name=category_name,
+                                    item_name=item_name))
 
 
 # Delete a category item
@@ -386,7 +392,14 @@ def deleteCategoryItem(category_name, item_name):
         session.commit()
         return redirect(url_for('showCategory', category_name=category_name))
     else:
-        return render_template('deleteCategoryItem.html', item=itemToDelete)
+        if login_session['username'] == itemToDelete.user.name:
+            return render_template('deleteCategoryItem.html',
+                                   item=itemToDelete)
+        else:
+            flash("You can only delete an item that you created.")
+            return redirect(url_for('showCategoryItem',
+                                    category_name=category_name,
+                                    item_name=item_name))
 
 
 # Disconnect based on provider
